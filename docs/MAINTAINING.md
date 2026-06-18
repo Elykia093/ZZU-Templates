@@ -1,6 +1,16 @@
-# 维护说明
+# ZZU-Templates 维护说明
 
-本仓库用于接手维护郑州大学 LaTeX 简历模板和论文模板。两个来源仓库通过 `git subtree` 导入到 `templates/` 下，根目录维护聚合层能力。
+本仓库用于接手维护郑州大学模板项目。当前合并 `ZZU-Resume-Template` 和 `ZZU-Thesis-Template` 两条线，两个来源仓库通过 `git subtree` 导入到 `templates/` 下，根目录维护聚合层能力。
+
+## 命名约定
+
+| 用途 | 对外名称 | 仓库内目录 |
+| --- | --- | --- |
+| 合并总仓库 | `ZZU-Templates` | 根目录 |
+| 简历模板 | `ZZU-Resume-Template` | `templates/resume` |
+| 论文模板 | `ZZU-Thesis-Template` | `templates/thesis` |
+
+对外展示名统一使用 `ZZU-` 大写前缀；仓库内目录保持小写，避免跨平台大小写差异。
 
 ## 来源
 
@@ -31,8 +41,8 @@ git subtree pull --prefix=templates/thesis https://github.com/Elykia093/zzuthesi
 ## 维护边界
 
 - 根目录维护聚合层：总 README、统一 Makefile、CI、接手说明、已知问题。
-- `templates/resume` 保持简历模板自身可独立构建。
-- `templates/thesis` 保持论文模板自身可独立构建。
+- `templates/resume` 保持 `ZZU-Resume-Template` 自身可独立构建。
+- `templates/thesis` 保持 `ZZU-Thesis-Template` 自身可独立构建。
 - 尽量避免把聚合层逻辑写进模板目录，减少后续 subtree 同步冲突。
 - 如果必须修改模板内部，先记录修改原因、影响范围和验证命令。
 

@@ -1,19 +1,31 @@
-# ZZU LaTeX Templates
+# ZZU-Templates
 
-郑州大学 LaTeX 模板聚合仓库，用于接手维护并统一整理两个现有模板：
+郑州大学模板合集仓库，用于接手维护并统一整理现有模板项目。当前收录两个 LaTeX 模板，后续也可以扩展到 Typst、Word、Markdown、PPT 等其他格式。
 
-- `templates/resume`: 郑州大学 LaTeX 简历模板，来源于 `Elykia093/zzu-resume-template`。
-- `templates/thesis`: 郑州大学本科毕业设计和研究生学位论文模板，来源于 `Elykia093/zzuthesis`。
+- `templates/resume`: `ZZU-Resume-Template`，来源于 `Elykia093/zzu-resume-template`。
+- `templates/thesis`: `ZZU-Thesis-Template`，来源于 `Elykia093/zzuthesis`。
 
-两个模板以 `git subtree` 导入，保留了原仓库历史。根目录只放聚合层文档、统一构建入口和维护说明，模板自身仍在各自目录中独立工作。
+两个模板以 `git subtree` 导入，保留原仓库历史。根目录只放聚合层文档、统一构建入口和维护说明，模板自身仍在各自目录中独立工作。
+
+## 命名约定
+
+对外展示名统一使用大写前缀和 Pascal/Kebab 混合格式：
+
+| 用途 | 名称 |
+| --- | --- |
+| 合并总仓库 | `ZZU-Templates` |
+| 简历模板 | `ZZU-Resume-Template` |
+| 论文模板 | `ZZU-Thesis-Template` |
+
+仓库内部目录继续使用小写路径，减少跨平台大小写差异带来的维护成本。
 
 ## 目录
 
 ```text
 .
 ├── templates/
-│   ├── resume/   # 简历模板
-│   └── thesis/   # 学位论文模板
+│   ├── resume/   # ZZU-Resume-Template
+│   └── thesis/   # ZZU-Thesis-Template
 ├── docs/
 │   └── MAINTAINING.md
 ├── Makefile
@@ -47,11 +59,11 @@ make a3cover
 
 ## 模板说明
 
-### 简历模板
+### ZZU-Resume-Template
 
 入口文件是 `templates/resume/resume.tex`，默认使用 XeLaTeX、内置字体、FontAwesome 和郑大相关图片资源。适合直接替换个人信息并生成简历 PDF。
 
-### 论文模板
+### ZZU-Thesis-Template
 
 入口文件是 `templates/thesis/main.tex`，模板类是 `templates/thesis/zzuthesis.cls`。默认文档类参数为 `master`，可按需要切换为 `bachelor`、`master` 或 `doctor`。
 
