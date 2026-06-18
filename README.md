@@ -39,6 +39,7 @@
 ```shell
 make resume
 make thesis
+make thesis-variants
 make thesis-a3
 make all
 make clean
@@ -54,6 +55,7 @@ make
 ```shell
 cd templates/thesis
 make thesis
+make variants
 make a3cover
 ```
 
@@ -69,12 +71,23 @@ make a3cover
 
 正文内容拆分在 `templates/thesis/data/`，参考文献在 `templates/thesis/ref/refs.bib`，参考文献样式为 `templates/thesis/zzubib.bst`。
 
+论文模板还保留了几种可选入口：
+
+| 入口 | 类文件 | 用途 |
+| --- | --- | --- |
+| `templates/thesis/main.tex` | `zzuthesis.cls` | 默认郑大学位论文模板 |
+| `templates/thesis/main-bachelor.tex` | `zzubachelor.cls` | 本科封面与页眉页脚修订版 |
+| `templates/thesis/main-guomoruo.tex` | `zzuname.cls` | 郭沫若题字版封面 |
+| `templates/thesis/main-blind.tex` | `MS.cls` | 盲审版入口，隐藏封面身份并跳过身份附页 |
+| `templates/thesis/main-promaster.tex` | `zzupromaster.cls` | 专业硕士封面字段 |
+
 ## 维护状态
 
 当前导入来源：
 
 - `Elykia093/zzu-resume-template` `master`, commit `940934c5b7c45703fb57c875390e475c1b8e950e`
 - `Elykia093/zzuthesis` `master`, commit `7565f04df6ee5c935021b2d91582c60b5a2d5064`
+- 本地补充素材：`D:\Tianxuan3\Desktop\新建文件夹` 下的 `zzuthesis.zip`、`zzuthesis-本科.7z`、`zzuthesis-专业硕士.7z`，用于补入本科、郭沫若题字版、盲审版和专业硕士变体。
 
 已知注意点：
 

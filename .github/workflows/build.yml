@@ -26,6 +26,17 @@ jobs:
           root_file: main.tex
           latexmk_use_xelatex: true
 
+      - name: Build ZZU-Thesis-Template variants
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: templates/thesis
+          root_file: |
+            main-bachelor.tex
+            main-guomoruo.tex
+            main-blind.tex
+            main-promaster.tex
+          latexmk_use_xelatex: true
+
       - name: Upload PDFs
         uses: actions/upload-artifact@v4
         with:
@@ -33,3 +44,7 @@ jobs:
           path: |
             templates/resume/resume.pdf
             templates/thesis/main.pdf
+            templates/thesis/main-bachelor.pdf
+            templates/thesis/main-guomoruo.pdf
+            templates/thesis/main-blind.pdf
+            templates/thesis/main-promaster.pdf

@@ -1,7 +1,7 @@
 RESUME_DIR = templates/resume
 THESIS_DIR = templates/thesis
 
-.PHONY: all resume thesis thesis-a3 clean
+.PHONY: all resume thesis thesis-variants thesis-a3 clean
 
 all: resume thesis
 
@@ -10,6 +10,9 @@ resume:
 
 thesis:
 	$(MAKE) -C $(THESIS_DIR) thesis
+
+thesis-variants:
+	$(MAKE) -C $(THESIS_DIR) variants
 
 thesis-a3:
 	$(MAKE) -C $(THESIS_DIR) a3cover

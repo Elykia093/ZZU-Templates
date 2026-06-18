@@ -17,6 +17,7 @@
 
 # Generated thesis PDFs
 templates/thesis/main.pdf
+templates/thesis/main-*.pdf
 templates/thesis/a3cover.pdf
 templates/thesis/spine.pdf
 
