@@ -1,0 +1,15 @@
+* text=auto
+
+*.bib text eol=lf
+*.bst text eol=lf
+*.cls text eol=lf
+*.md text eol=lf
+*.sty text eol=lf
+*.tex text eol=lf
+*.yml text eol=lf
+Makefile text eol=lf
+
+*.eps binary
+*.otf binary
+*.pdf binary
+*.png binary

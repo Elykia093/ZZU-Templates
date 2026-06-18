@@ -1,0 +1,35 @@
+name: Build templates
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build resume template
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: templates/resume
+          root_file: resume.tex
+          latexmk_use_xelatex: true
+
+      - name: Build thesis template
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: templates/thesis
+          root_file: main.tex
+          latexmk_use_xelatex: true
+
+      - name: Upload PDFs
+        uses: actions/upload-artifact@v4
+        with:
+          name: zzu-template-pdfs
+          path: |
+            templates/resume/resume.pdf
+            templates/thesis/main.pdf
