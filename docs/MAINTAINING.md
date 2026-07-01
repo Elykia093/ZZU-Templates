@@ -1,6 +1,6 @@
 # ZZU-Templates 维护说明
 
-本仓库用于接手维护郑州大学模板项目。当前合并 `ZZU-Resume-Template` 和 `ZZU-Thesis-Template` 两条线，两个来源仓库通过 `git subtree` 导入到 `templates/` 下，根目录维护聚合层能力。
+本仓库用于接手维护郑州大学模板项目。当前合并 `ZZU-Resume-Template` 和 `ZZU-Thesis-Template` 两条线，两个上游模板通过 `git subtree` 导入到 `templates/` 下，根目录维护聚合层能力。
 
 ## 命名约定
 
@@ -14,10 +14,10 @@
 
 ## 来源
 
-| 目录 | 来源仓库 | 当前导入提交 | 上游来源 |
+| 目录 | 上游来源 | 当前导入 fork | 当前导入提交 |
 | --- | --- | --- | --- |
-| `templates/resume` | `https://github.com/Elykia093/zzu-resume-template.git` | `940934c5b7c45703fb57c875390e475c1b8e950e` | `M0rtzz/zzu-resume-template` |
-| `templates/thesis` | `https://github.com/Elykia093/zzuthesis.git` | `7565f04df6ee5c935021b2d91582c60b5a2d5064` | `tuxify/zzuthesis` |
+| `templates/resume` | `https://github.com/M0rtzz/zzu-resume-template.git` | `https://github.com/Elykia093/zzu-resume-template.git` | `940934c5b7c45703fb57c875390e475c1b8e950e` |
+| `templates/thesis` | `https://github.com/tuxify/zzuthesis.git` | `https://github.com/Elykia093/zzuthesis.git` | `7565f04df6ee5c935021b2d91582c60b5a2d5064` |
 
 补充素材：
 
@@ -29,13 +29,13 @@
 
 ## 同步上游
 
-从 fork 同步简历模板：
+从当前导入 fork 同步简历模板：
 
 ```shell
 git subtree pull --prefix=templates/resume https://github.com/Elykia093/zzu-resume-template.git master
 ```
 
-从 fork 同步论文模板：
+从当前导入 fork 同步论文模板：
 
 ```shell
 git subtree pull --prefix=templates/thesis https://github.com/Elykia093/zzuthesis.git master
