@@ -1,9 +1,10 @@
 # ZZU-Templates
 
-郑州大学模板合集仓库，用于接手维护并统一整理现有模板项目。当前收录两个 LaTeX 模板，后续也可以扩展到 Typst、Word、Markdown、PPT 等其他格式。
+郑州大学模板合集仓库，用于接手维护并统一整理现有模板项目。当前收录两个 LaTeX 模板和一组 Word 论文模板，后续也可以扩展到 Typst、Markdown、PPT 等其他格式。
 
 - `templates/resume`: `ZZU-Resume-Template`，来源于 `M0rtzz/zzu-resume-template`。
 - `templates/thesis`: `ZZU-Thesis-Template`，来源于 `tuxify/zzuthesis`。
+- `templates/word`: `ZZU-Word-Thesis-Templates`，来源于本地桌面收集的郑大 Word 论文模板。
 
 两个模板以 `git subtree` 导入，保留原仓库历史。根目录只放聚合层文档、统一构建入口和维护说明，模板自身仍在各自目录中独立工作。
 
@@ -16,6 +17,7 @@
 | 合并总仓库 | `ZZU-Templates` |
 | 简历模板 | `ZZU-Resume-Template` |
 | 论文模板 | `ZZU-Thesis-Template` |
+| Word 论文模板 | `ZZU-Word-Thesis-Templates` |
 
 仓库内部目录继续使用小写路径，减少跨平台大小写差异带来的维护成本。
 
@@ -25,7 +27,8 @@
 .
 ├── templates/
 │   ├── resume/   # ZZU-Resume-Template
-│   └── thesis/   # ZZU-Thesis-Template
+│   ├── thesis/   # ZZU-Thesis-Template
+│   └── word/     # ZZU-Word-Thesis-Templates
 ├── docs/
 │   └── MAINTAINING.md
 ├── Makefile
@@ -81,6 +84,17 @@ make a3cover
 | `templates/thesis/main-blind.tex` | `MS.cls` | 盲审版入口，隐藏封面身份并跳过身份附页 |
 | `templates/thesis/main-promaster.tex` | `zzupromaster.cls` | 专业硕士封面字段 |
 
+### ZZU-Word-Thesis-Templates
+
+Word 模板放在 `templates/word/`，适合不使用 LaTeX 的毕业论文或学院定制场景。当前包含：
+
+- `郑大毕业论文（设计）模板-V2.docx`
+- `郑大-国际教育学院-留学生毕业论文模板-V2.docx`
+- `郑大-外国语与国际关系学院-俄语专业论文模板-V2.docx`
+- `郑大-外国语与国际关系学院-德语专业论文模板-V2.docx`
+- `郑大-外国语与国际关系学院-英语专业论文模板-V2.docx`
+- `郑大-文科类学院论文模板-V2.docx`
+
 ## 维护状态
 
 当前上游与导入记录：
@@ -88,6 +102,7 @@ make a3cover
 - 上游：`M0rtzz/zzu-resume-template`；当前通过 fork `Elykia093/zzu-resume-template` `master` 导入，commit `940934c5b7c45703fb57c875390e475c1b8e950e`
 - 上游：`tuxify/zzuthesis`；当前通过 fork `Elykia093/zzuthesis` `master` 导入，commit `7565f04df6ee5c935021b2d91582c60b5a2d5064`
 - 本地补充素材：`D:\Tianxuan3\Desktop\新建文件夹` 下的 `zzuthesis.zip`、`zzuthesis-本科.7z`、`zzuthesis-专业硕士.7z`，用于补入本科、郭沫若题字版、盲审版和专业硕士变体。
+- 本地补充素材：`D:\Tianxuan3\Desktop` 下的 6 个 Word 论文模板，复制到 `templates/word/` 后清理了 Word 文档元数据。
 
 已知注意点：
 
@@ -95,5 +110,6 @@ make a3cover
 - `zzuthesis` 上游有未关闭 issue 提到 `zzubib.bst` 参考文献排序风险，正式论文使用前需要复核。
 - `zzuthesis` 的格式规范较旧，不同学院和年份可能有封面、页码、参考文献等差异。
 - `zzu-resume-template` 带 MIT License，但内置字体的实际授权仍需自行确认。
+- `templates/word` 是二进制 Word 文件，不保留可读 diff；正式使用前仍需按所在学院最新格式要求复核。
 
 更多维护流程见 `docs/MAINTAINING.md`。

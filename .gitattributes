@@ -1,5 +1,6 @@
 * text=auto
 
+.gitattributes text eol=lf
 *.bib text eol=lf
 *.bst text eol=lf
 *.cls text eol=lf
@@ -10,6 +11,10 @@
 Makefile text eol=lf
 
 *.eps binary
+*.doc binary
+*.docx binary
+*.dot binary
+*.dotx binary
 *.otf binary
 *.pdf binary
 *.png binary
