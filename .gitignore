@@ -15,6 +15,10 @@
 *.toc
 *.xdv
 
+# Python cache
+__pycache__/
+*.py[cod]
+
 # Generated thesis PDFs
 templates/thesis/main.pdf
 templates/thesis/main-*.pdf

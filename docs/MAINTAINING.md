@@ -1,6 +1,6 @@
 # ZZU-Templates 维护说明
 
-本仓库用于接手维护郑州大学模板项目。当前合并 `ZZU-Resume-Template` 和 `ZZU-Thesis-Template` 两条线，并补充一组本地收集的 Word 论文模板。两个上游 LaTeX 模板通过 `git subtree` 导入到 `templates/` 下，根目录维护聚合层能力。
+本仓库用于接手维护郑州大学模板项目。当前合并 `ZZU-Resume-Template` 和 `ZZU-Thesis-Template` 两条线，并补充一组本地收集的 Word 论文模板。两个上游 LaTeX 模板通过 `git subtree` 导入到 `templates/` 下，根目录维护聚合层文档、统一 Makefile、检查脚本和 CI workflow。
 
 ## 命名约定
 
@@ -52,6 +52,8 @@ git subtree pull --prefix=templates/thesis https://github.com/Elykia093/zzuthesi
 ## 维护边界
 
 - 根目录维护聚合层：总 README、统一 Makefile、CI、接手说明、已知问题。
+- `docs/PROJECT_MAP.md` 维护项目地图和入口索引，`templates/README.md` 维护模板目录索引。
+- `scripts/` 放只读检查或维护辅助脚本；脚本默认不得改动模板文件。
 - `templates/resume` 保持 `ZZU-Resume-Template` 自身可独立构建。
 - `templates/thesis` 保持 `ZZU-Thesis-Template` 自身可独立构建。
 - `templates/word` 是本地补充的二进制 Word 模板集合，不走 subtree；更新时保留来源记录，先清理文档元数据，再验证能正常打开或导出。
@@ -72,6 +74,7 @@ make thesis-a3
 最小静态检查：
 
 ```shell
+make check
 git status --short
 git log --oneline --graph --decorate -n 20
 ```
@@ -79,12 +82,12 @@ git log --oneline --graph --decorate -n 20
 Word 模板最小检查：
 
 ```shell
-Get-ChildItem templates/word -Filter *.docx | ForEach-Object {
-  python -m zipfile --test $_.FullName
-}
+python scripts/check_word_templates.py
 ```
 
 如果本机安装 Microsoft Word，可逐个打开或导出 PDF 检查版面。
+
+GitHub Actions 中的 `Build ZZU-Templates` workflow 当前为手动触发，执行 Word 模板完整性检查并编译简历、论文主入口和论文变体。它不能替代学院格式人工复核，也不是自动发布流水线。
 
 ## 已知风险
 
@@ -93,4 +96,4 @@ Get-ChildItem templates/word -Filter *.docx | ForEach-Object {
 - `templates/thesis` 上游未声明许可证，发布合并仓库时应在 README 中明确说明。
 - `templates/resume` 的代码是 MIT License，但字体文件的授权来源需要额外确认。
 - `templates/word` 来自本地桌面文件，许可证和最新学院格式要求仍需人工确认。
-- 本仓库根层 CI 只验证能否编译示例文件和论文变体，不能证明内容满足各学院最新格式规范。
+- 本仓库根层手动 workflow 只验证 Word 文件包完整性和 LaTeX 示例编译，不能证明内容满足各学院最新格式规范。

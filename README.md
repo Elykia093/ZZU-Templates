@@ -6,7 +6,7 @@
 - `templates/thesis`: `ZZU-Thesis-Template`，来源于 `tuxify/zzuthesis`。
 - `templates/word`: `ZZU-Word-Thesis-Templates`，来源于本地桌面收集的郑大 Word 论文模板。
 
-两个模板以 `git subtree` 导入，保留原仓库历史。根目录只放聚合层文档、统一构建入口和维护说明，模板自身仍在各自目录中独立工作。
+两个 LaTeX 模板以 `git subtree` 导入，保留原仓库历史。根目录只放聚合层文档、统一构建入口、静态检查脚本和维护说明，模板自身仍在各自目录中独立工作。
 
 ## 命名约定
 
@@ -26,11 +26,15 @@
 ```text
 .
 ├── templates/
+│   ├── README.md # 模板索引
 │   ├── resume/   # ZZU-Resume-Template
 │   ├── thesis/   # ZZU-Thesis-Template
 │   └── word/     # ZZU-Word-Thesis-Templates
 ├── docs/
+│   ├── PROJECT_MAP.md
 │   └── MAINTAINING.md
+├── scripts/
+│   └── check_word_templates.py
 ├── Makefile
 └── README.md
 ```
@@ -44,9 +48,13 @@ make resume
 make thesis
 make thesis-variants
 make thesis-a3
+make word-check
+make check
 make all
 make clean
 ```
+
+`make word-check` 会验证 `templates/word/*.docx` 是否都是可读取的 Word ZIP 包；`make check` 当前等价于 `make word-check`，用于没有完整 TeX 环境时做最小静态检查。
 
 也可以进入模板目录独立构建：
 
@@ -63,6 +71,8 @@ make a3cover
 ```
 
 ## 模板说明
+
+模板目录索引见 `templates/README.md`，项目级结构和维护边界见 `docs/PROJECT_MAP.md`。
 
 ### ZZU-Resume-Template
 

@@ -1,9 +1,12 @@
 RESUME_DIR = templates/resume
 THESIS_DIR = templates/thesis
+PYTHON ?= python
 
-.PHONY: all resume thesis thesis-variants thesis-a3 clean
+.PHONY: all resume thesis thesis-variants thesis-a3 word-check check clean
 
 all: resume thesis
+
+check: word-check
 
 resume:
 	$(MAKE) -C $(RESUME_DIR)
@@ -16,6 +19,9 @@ thesis-variants:
 
 thesis-a3:
 	$(MAKE) -C $(THESIS_DIR) a3cover
+
+word-check:
+	$(PYTHON) scripts/check_word_templates.py
 
 clean:
 	-$(MAKE) -C $(RESUME_DIR) clean

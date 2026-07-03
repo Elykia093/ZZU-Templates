@@ -11,6 +11,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Check Word thesis templates
+        run: python scripts/check_word_templates.py
+
       - name: Build ZZU-Resume-Template
         uses: xu-cheng/latex-action@v3
         with:
