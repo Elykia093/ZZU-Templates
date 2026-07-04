@@ -6,9 +6,10 @@
 
 | 区域 | 路径 | 用途 | 来源 / 更新方式 |
 | --- | --- | --- | --- |
-| 聚合文档 | `README.md`, `docs/` | 总览、维护说明、项目地图 | 本仓库维护 |
-| 统一命令 | `Makefile`, `scripts/` | 根层构建入口和只读检查脚本 | 本仓库维护 |
+| 聚合文档 | `README.md`, `docs/` | 总览、使用说明、FAQ、维护说明、项目地图 | 本仓库维护 |
+| 统一命令 | `Makefile`, `scripts/` | 根层构建入口、只读检查脚本、发布打包脚本 | 本仓库维护 |
 | CI workflow | `.github/workflows/build.yml` | 手动构建和静态检查 | 本仓库维护 |
+| Release workflow | `.github/workflows/release.yml` | tag 发布 draft release 和 release assets | 本仓库维护 |
 | 简历模板 | `templates/resume/` | LaTeX 简历模板 | 从简历模板 fork 通过 `git subtree` 导入 |
 | 论文模板 | `templates/thesis/` | LaTeX 论文模板及变体 | 从论文模板 fork 通过 `git subtree` 导入，并补入本地变体 |
 | Word 模板 | `templates/word/` | 非 LaTeX 场景的 Word 论文模板 | 本地二进制模板集合 |
@@ -22,8 +23,10 @@
 | 构建论文变体 | `make thesis-variants` | 生成本科、郭沫若题字、盲审、专业硕士变体 |
 | 构建 A3 封面 | `make thesis-a3` | 在 `templates/thesis/` 内生成封面文件 |
 | 检查 Word 模板 | `make word-check` 或 `python scripts/check_word_templates.py` | 验证所有 `.docx` 都是可读取的 Word ZIP 包 |
+| 打包发布 zip | `make release-package` 或 `python scripts/package_release.py` | 生成 Word 模板 zip 和源码 zip 到 `dist/` |
 | 清理构建产物 | `make clean` | 转到各模板目录执行清理 |
 | 手动 CI | `.github/workflows/build.yml` | 仅 `workflow_dispatch`，不是自动发布流水线 |
+| Draft release | `.github/workflows/release.yml` | 推送 `v*` tag 或手动触发，生成 PDF/zip release assets |
 
 ## 维护边界
 
@@ -31,6 +34,7 @@
 - 尽量避免直接修改 subtree 管理的模板内部文件；如必须修改，先在 `docs/MAINTAINING.md` 记录原因、影响范围和验证命令。
 - 不添加会暗示覆盖全部上游内容的根许可证；`templates/thesis` 上游许可证仍未知。
 - Word 文件按二进制模板处理：保留来源说明，替换前清理元数据，替换后运行 Word 完整性检查。
+- Release workflow 默认创建 draft release，公开前必须人工检查 PDF、Word zip、源码 zip 和格式风险说明。
 - 构建通过只能证明示例能编译，不能证明模板符合学校或学院最新格式要求。
 
 ## 当前已知风险

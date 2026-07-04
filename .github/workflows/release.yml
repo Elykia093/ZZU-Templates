@@ -1,0 +1,98 @@
+name: Release ZZU-Templates
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version name used for draft release assets"
+        required: false
+        default: "manual-snapshot"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "value=${{ inputs.version }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check Word thesis templates
+        run: python scripts/check_word_templates.py
+
+      - name: Package zip artifacts
+        run: python scripts/package_release.py --version "${{ steps.version.outputs.value }}"
+
+      - name: Build ZZU-Resume-Template
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: templates/resume
+          root_file: resume.tex
+          latexmk_use_xelatex: true
+
+      - name: Build ZZU-Thesis-Template
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: templates/thesis
+          root_file: main.tex
+          latexmk_use_xelatex: true
+
+      - name: Build ZZU-Thesis-Template variants
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: templates/thesis
+          root_file: |
+            main-bachelor.tex
+            main-guomoruo.tex
+            main-blind.tex
+            main-promaster.tex
+          latexmk_use_xelatex: true
+
+      - name: Collect PDF artifacts
+        run: |
+          version="${{ steps.version.outputs.value }}"
+          cp templates/resume/resume.pdf "dist/zzu-resume-template-${version}.pdf"
+          cp templates/thesis/main.pdf "dist/zzu-thesis-template-${version}.pdf"
+          cp templates/thesis/main-bachelor.pdf "dist/zzu-thesis-bachelor-${version}.pdf"
+          cp templates/thesis/main-guomoruo.pdf "dist/zzu-thesis-guomoruo-${version}.pdf"
+          cp templates/thesis/main-blind.pdf "dist/zzu-thesis-blind-${version}.pdf"
+          cp templates/thesis/main-promaster.pdf "dist/zzu-thesis-promaster-${version}.pdf"
+
+      - name: Write release notes
+        run: |
+          version="${{ steps.version.outputs.value }}"
+          cat > RELEASE_NOTES.md <<EOF
+          # ZZU-Templates ${version}
+
+          Draft release assets:
+
+          - Built LaTeX sample PDFs.
+          - Word thesis templates zip.
+          - Source package zip.
+
+          Please review generated PDFs, Word templates, license notes, and current school or college formatting requirements before publishing this release.
+          EOF
+
+      - name: Create draft release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.value }}
+          name: ZZU-Templates ${{ steps.version.outputs.value }}
+          body_path: RELEASE_NOTES.md
+          draft: true
+          prerelease: false
+          files: dist/*

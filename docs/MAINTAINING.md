@@ -1,6 +1,6 @@
 # ZZU-Templates 维护说明
 
-本仓库用于接手维护郑州大学模板项目。当前合并 `ZZU-Resume-Template` 和 `ZZU-Thesis-Template` 两条线，并补充一组本地收集的 Word 论文模板。两个上游 LaTeX 模板通过 `git subtree` 导入到 `templates/` 下，根目录维护聚合层文档、统一 Makefile、检查脚本和 CI workflow。
+本仓库用于接手维护郑州大学模板项目。当前合并 `ZZU-Resume-Template` 和 `ZZU-Thesis-Template` 两条线，并补充一组本地收集的 Word 论文模板。两个上游 LaTeX 模板通过 `git subtree` 导入到 `templates/` 下，根目录维护聚合层文档、统一 Makefile、检查脚本、发布打包脚本和 GitHub Actions workflow。
 
 ## 命名约定
 
@@ -52,7 +52,7 @@ git subtree pull --prefix=templates/thesis https://github.com/Elykia093/zzuthesi
 ## 维护边界
 
 - 根目录维护聚合层：总 README、统一 Makefile、CI、接手说明、已知问题。
-- `docs/PROJECT_MAP.md` 维护项目地图和入口索引，`templates/README.md` 维护模板目录索引。
+- `docs/USAGE.md` 维护使用说明，`docs/FAQ.md` 维护常见问题，`docs/PROJECT_MAP.md` 维护项目地图和入口索引，`templates/README.md` 维护模板目录索引。
 - `scripts/` 放只读检查或维护辅助脚本；脚本默认不得改动模板文件。
 - `templates/resume` 保持 `ZZU-Resume-Template` 自身可独立构建。
 - `templates/thesis` 保持 `ZZU-Thesis-Template` 自身可独立构建。
@@ -88,6 +88,40 @@ python scripts/check_word_templates.py
 如果本机安装 Microsoft Word，可逐个打开或导出 PDF 检查版面。
 
 GitHub Actions 中的 `Build ZZU-Templates` workflow 当前为手动触发，执行 Word 模板完整性检查并编译简历、论文主入口和论文变体。它不能替代学院格式人工复核，也不是自动发布流水线。
+
+## 发布流程
+
+本地生成 release zip：
+
+```shell
+make release-package
+```
+
+或指定版本：
+
+```shell
+python scripts/package_release.py --version v0.1.0
+```
+
+产物写入 `dist/`：
+
+- `zzu-word-thesis-templates-<version>.zip`
+- `zzu-templates-source-<version>.zip`
+
+推送 `v*` tag 会触发 `.github/workflows/release.yml`。该 workflow 会：
+
+1. 运行 Word 模板完整性检查。
+2. 生成 Word 模板 zip 和源码 zip。
+3. 编译简历 PDF、论文主入口 PDF 和论文变体 PDF。
+4. 创建 draft release 并上传 `dist/*`。
+
+发布前检查：
+
+- draft release 中的 PDF 是否能打开。
+- Word zip 是否包含 6 个 `.docx` 模板。
+- 源码 zip 是否包含根文档、脚本和 `templates/`。
+- README、FAQ、已知风险和许可证边界是否仍准确。
+- 学校或学院当年格式要求是否需要额外提示。
 
 ## 已知风险
 

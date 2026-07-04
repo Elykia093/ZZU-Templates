@@ -19,6 +19,9 @@
 __pycache__/
 *.py[cod]
 
+# Release artifacts
+dist/
+
 # Generated thesis PDFs
 templates/thesis/main.pdf
 templates/thesis/main-*.pdf
