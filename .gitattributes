@@ -20,3 +20,5 @@ Makefile text eol=lf
 *.otf binary
 *.pdf binary
 *.png binary
+
+archive/original/** -text -diff -merge -eol

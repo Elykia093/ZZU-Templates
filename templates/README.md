@@ -14,4 +14,4 @@
 - `word/` 是本地二进制模板集合，不走 subtree。
 - 根层自动化、仓库文档和维护检查优先放在模板目录外；只有模板自身独立运行需要时，才把逻辑放进对应子目录。
 
-使用说明见 `../docs/USAGE.md`，常见问题见 `../docs/FAQ.md`，项目地图见 `../docs/PROJECT_MAP.md`，维护流程见 `../docs/MAINTAINING.md`。
+使用说明见 `../docs/USAGE.md`，常见问题见 `../docs/FAQ.md`，项目地图见 `../docs/PROJECT_MAP.md`，维护流程见 `../docs/MAINTAINING.md`，发布与格式复核见 `../docs/RELEASE.md`。

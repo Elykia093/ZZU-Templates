@@ -25,6 +25,43 @@ make check
 
 它会检查 `templates/word/*.docx` 是否能作为 Word ZIP 包读取。这个检查不依赖 LaTeX，但覆盖面也只限 Word 文件完整性。
 
+发布前还可以运行更完整的聚合层检查：
+
+```shell
+make project-check
+```
+
+它会额外检查 Python 脚本语法、release zip 结构、Markdown 本地链接和关键文件是否存在，但仍不编译 LaTeX。
+
+## 本地没有 `make` 怎么办？
+
+可以直接运行 Python 入口：
+
+```shell
+python scripts/check_word_templates.py
+python scripts/check_project.py
+python scripts/package_release.py --check --version test-local
+```
+
+如果要生成正式 release zip：
+
+```shell
+python scripts/package_release.py --version v0.1.0
+```
+
+没有 `make` 时，LaTeX 模板仍需要进入对应目录，用本机可用的 TeX 工具或交给 GitHub Actions 构建。
+
+## 本地没有 TeX 环境怎么发布前验证？
+
+先完成本地无 TeX 检查：
+
+```shell
+python scripts/check_project.py
+git diff --check
+```
+
+然后在 GitHub Actions 手动触发 `Build ZZU-Templates`，或通过测试 tag / `workflow_dispatch` 触发 `Release ZZU-Templates`，用 CI 的 TeX 环境生成 PDF。CI 通过后仍要打开 PDF 和 Word 模板做人工格式复核。
+
 ## GitHub Actions 通过是否代表格式一定正确？
 
 不代表。Actions 只能证明示例文件能编译、Word 文件包没有损坏。封面字段、页码、参考文献、学院自定义要求和当年格式细则仍需要人工复核。

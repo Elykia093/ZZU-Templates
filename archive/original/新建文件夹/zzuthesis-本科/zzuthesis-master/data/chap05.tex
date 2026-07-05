@@ -1,0 +1,164 @@
+\chapter{修订与说明}
+\label{cha:change}
+
+本人在使用过程中发现了一些与《郑州大学学位论文写作规范》不一致的地方，因此根据原有的模板进行了一些修改。此外，根据本人的使用习惯增加和删除了部分宏包、注释等。最后给出了一些可能遇到的问题。由于能力有限，本版本依然有一些问题无法解决。
+
+\rightline{——\color{teal}{$\mathsf{S} \mathsf{Q} \mathsf{K}$}   }
+
+\section{编译环境的变化}
+\subsection{一键盲审}
+$\star$ 新增了盲审专用格式文件{\color{blue}MS.cls}。
+
+$\star$ 在{\color{blue}main.tex}文件中修改环境即可
+
+$\star$ 正常编译时为zzuthesis
+\begin{latex}
+    \documentclass[master]{zzuthesis}
+\end{latex}
+
+$\star$ 盲审编译时为MS
+\begin{latex}
+    \documentclass[master]{MS}
+\end{latex}
+
+
+\subsection{新定义命令}
+$\star$ 文献引用命令，{\color{blue}\textbackslash mycite\{chen2001\}}编译后为\mycite{chen2001}，{\color{blue}\textbackslash cite\{chen2001\}}编译后为\cite{chen2001}。
+\begin{latex}
+    \newcommand{\mycite}[1]{\scalebox{1.3}[1.3]{\raisebox{-0.65ex}{\cite{#1}}}}
+\end{latex}
+
+
+
+\subsection{宏包的变化}
+
+所有的宏包都在{\color{blue}{.cls}}格式文件中
+
+$\star $ 支持中文字体——{\heiti 黑体}
+\begin{latex}
+    \RequirePackage{xeCJK}
+\end{latex}
+
+$\star$ 支持{\color{blue}公式}中字母字体为——Times New Roman ，并在{\color{blue}{main.tex}}文件中增加命令{\color{blue}\textbackslash setmainfont\{Times New Roman\}}
+\begin{latex}
+    \RequirePackage{mathptmx}
+\end{latex}
+
+
+$\star$ 支持{\color{blue}正文}中字母字体为——Times New Roman 
+\begin{latex}
+    \RequirePackage{fontspec}
+\end{latex}
+
+$\star$ 支持全文任意字体加粗
+\begin{latex}
+    \RequirePackage{bm}
+\end{latex}
+
+$\star$ 支持横向页面
+\begin{latex}
+    \RequirePackage{pdflscape}
+\end{latex}
+
+$\star$ 删除{\color{blue}\{unicode-math\}}宏包，使用{\color{blue}\{amsmath,amsthm\}}宏包。前者宏包会导致部分大写的希腊字母无法正体。
+\begin{latex}
+    \RequirePackage{amsmath,amsthm}
+    %\RequirePackage{unicode-math}                        
+    %\unimathsetup{                                       
+    %  math-style = ISO,                                  
+    %  bold-style = ISO,                                  
+    %  nabla      = upright,                              
+    %  partial    = upright,                              
+    %} 
+\end{latex}
+
+
+\section{内容修订}
+\subsection{封面}
+\begin{itemize}
+    \item 更换了新版的校徽
+    \item 删除了作者信息部分的下划线，并保持左对齐
+    \item 修改了{\color{blue}学位论文原创性声明}和{\color{blue}学位论文使用授权声明}的字体
+\end{itemize}
+\subsection{摘要}
+\begin{itemize}
+    \item 删除了关键词与摘要内容的空行
+\end{itemize}
+\subsection{目录}
+\begin{itemize}
+    \item 增加了中英文摘要、插图清单、表格清单和主要符号对照表的目录
+    \item 各级标题与页码之间的点统一使用小四号
+\end{itemize}
+\subsection{正文}
+\begin{itemize}
+    \item 章节字体修改为——黑体
+    \item 正文英文和公式的字体修改为——Times New Roman
+\end{itemize}
+\subsection{参考文献}
+\begin{itemize}
+    \item 卷号后的冒号修改为中文冒号“：”
+    \item 所有逗号使用中文逗号“，”
+    \item 网页引用的类型修改为——[EB]
+\end{itemize}
+\subsection{致谢}
+\begin{itemize}
+    \item 将致谢正文放置文章的最后
+\end{itemize}
+
+\section{Q \& A}
+
+\noindent {\sihao\color{red} Q1: 由于图表中引用了文献导致参考文献无法正确排序}
+
+修订者是使用{\color{blue}VS Code} + {\color{blue}texlive2020}进行编译
+\begin{itemize}
+    \item 每次编译前
+    \item 需要先清理辅助文件(Clean up auxiliary files)
+    \item 再进行编译(Recipe: xe->bib->xe->xe)
+    \item 编译后不清理，以保证第二个问题的解决
+\end{itemize}
+
+Another Way:设置{\color{blue}VS Code}的{\color{blue}settings.json}文件，每次编译后默认删除{\color{blue}main.lof}  和 {\color{blue}main.lot} 文件。此方法在处理第二个问题时，需先关闭自动删除功能，将手动修改的两个文件保存至父目录，再打开功能。代码如下：
+\begin{latex}
+    "latex-workshop.latex.autoClean.run": "onBuilt", //注意结尾是 t 不是 d
+    "latex-workshop.latex.clean.fileTypes": [        //注意，'//'代表注释符
+//  "*.lof",                           //此处取消注释符即开启自动删除功能 
+//  "*.lot",                           //此处取消注释符即开启自动删除功能
+//  "*.aux",
+//  "*.bbl",
+//  "*.blg",
+//  "*.idx",
+//  "*.ind",
+//  "*.out",
+//  "*.toc",
+//  "*.acn",
+//  "*.acr",
+//  "*.alg",
+//  "*.glg",
+//  "*.glo",
+//  "*.gls",
+//  "*.ist",
+//  "*.fls",
+//  "*.log",
+//  "*.fdb_latexmk",
+//],
+\end{latex}
+
+如果使用其他软件+{\color{blue}texlive}编译，如{\color{blue}WinEdt}
+\begin{itemize}
+    \item 每次编译前
+    \item 需要先清理辅助文件(点击垃圾箱图标)
+    \item 再进行编译(XeTex->BibTex->XeTex->XeTex)
+    \item 编译后不清理，以保证第二个问题的解决
+\end{itemize}
+
+没有删除辅助文件快捷键的软件，可手动进入{\color{blue}main.tex}文件目录下删去除{\color{blue}main.tex}文件外所有前缀为{\color{blue}main.}的文件。
+
+\noindent {\sihao\color{red} Q2: 图表目录生成时会自动使用`caption'内全部内容  }
+\begin{itemize}
+    \item 为保证目录的简洁                            
+    \item 可分别在`main.lof'和`main.lot'文件内手动修改
+    \item 修改后需将文件保存至{\color{blue}main.tex}文件的父目录                  
+    \item 每次通过Q1中的编译方法编译后
+    \item 再将两个文件移入{\color{blue}main.tex}文件目录下
+    \item 再次XeTex编译即可
+\end{itemize}

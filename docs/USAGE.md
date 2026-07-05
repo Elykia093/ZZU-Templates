@@ -32,6 +32,7 @@ make thesis
 make thesis-variants
 make thesis-a3
 make word-check
+make project-check
 make release-package
 make check
 make all
@@ -39,6 +40,8 @@ make clean
 ```
 
 `make check` 当前只做 Word 模板完整性检查，适合没有 TeX 环境时快速确认二进制模板没有损坏。完整 LaTeX 验证需要运行 `make resume`、`make thesis` 和 `make thesis-variants`。
+
+`make project-check` 是发布前更完整的轻量检查入口，会串起 Python 语法检查、Word 完整性检查、release zip 结构 dry-run、Markdown 本地链接和关键文件存在性检查。它不编译 LaTeX，也不替代 PDF 人工格式复核。
 
 ## 简历模板
 
@@ -110,9 +113,15 @@ python scripts/check_word_templates.py
 python scripts/package_release.py --version v0.1.0
 ```
 
+只验证 zip 结构和必需文件、不长期保留 `dist/` 产物：
+
+```shell
+python scripts/package_release.py --check --version v0.1.0
+```
+
 生成文件在 `dist/`：
 
 - `zzu-word-thesis-templates-v0.1.0.zip`
 - `zzu-templates-source-v0.1.0.zip`
 
-发布前仍应先运行 `make check`，并在有 TeX 环境的机器或 GitHub Actions 中确认 LaTeX 示例可以编译。
+发布前仍应先运行 `make check` 或 `make project-check`，并在有 TeX 环境的机器或 GitHub Actions 中确认 LaTeX 示例可以编译。

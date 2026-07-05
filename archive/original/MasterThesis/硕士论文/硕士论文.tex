@@ -1,0 +1,52 @@
+% 2023-04-10 v1.1
+% 1. 编辑以下相关文件：
+% 按Ctrl键同时用鼠标左键单击以下文件名可打开相关文件
+% \input{../Common/TexFiles/封面}
+% \input{../Common/TexFiles/摘要}
+% \input{../Common/TexFiles/符号说明}
+% \input{../Common/Demo/内容要求}
+% \input{../Common/Demo/格式要求}
+% \input{../Common/Demo/书写要求}
+% \input{../Common/Demo/模板使用说明}
+% \input{../Common/BibFile/BibFile.bib}
+% \input{../Common/TexFiles/附录}
+% \input{../Common/TexFiles/作者简介}
+% \input{../Common/TexFiles/致谢}
+
+% 2. 编译环境：
+% （VScode(加上LaTex Workshop扩展)+Texlive环境）
+
+% 3. 编译生成PDF文件方法：
+% （1）在LaTex扩展中“Build LaTex project”中点击“Recipe:xelatex”
+% （2）或在些文档的右上角点击绿色“三角播放”按钮。
+%  以上两种方法适合快速编译，不能正确显示各类引用编号。
+% （3）在LaTex扩展中“Build LaTex project”中点击“Recipe:All”
+%  以上方法生成最终包含正确引用的PDF文件。
+
+% 使用“betterformat”选项
+%  (1)封面上使用楷体
+%  (2)封面“硕士学位论文”和“郑州大学”手写体严格居中（建议选择）
+% 不用“betterformat”选项
+%  (1)封面使用GB_2312楷体, Windows 10中需要自行下载安装
+%  (2)封面“硕士学位论文”和“郑州大学”手写体整体右移0.43cm
+% “单面打印”选项
+%  按照学校模板要求，硕士论文可以单面打印，需选择“单面打印”
+%  如果页码较多，可以去掉该选项，使用双面打印模式。
+\documentclass[betterformat,单面打印]{../Common/Template/MasterThesis}
+
+\begin{document}
+\input{封面}
+\input{摘要}
+\frontmatter
+\input{符号说明}
+\mainmatter
+\input{内容要求}
+\input{格式要求}
+\input{书写要求}
+\input{模板使用说明}
+\backmatter
+\bibliography{../Common/BibFile/BibFile.bib}
+\input{附录}
+\input{作者简介}
+\input{致谢}
+\end{document}
