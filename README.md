@@ -67,6 +67,14 @@ make clean
 
 `make project-check` 会运行更完整的聚合层质量检查，包括 Python 语法检查、Word 完整性检查、release zip 结构 dry-run、Markdown 本地链接和关键文件存在性检查。
 
+VitePress 文档站使用 VitePress 2.0 next 通道，当前锁定 `vitepress@2.0.0-alpha.18`。需要 Node.js `^20.19.0 || >=22.12.0`：
+
+```shell
+npm install
+npm run docs:dev
+npm run docs:build
+```
+
 也可以进入模板目录独立构建：
 
 ```shell
@@ -86,8 +94,10 @@ make a3cover
 - `docs/USAGE.md`: 模板选择、构建命令、Word 模板检查和发布包说明。
 - `docs/FAQ.md`: 常见问题、格式复核、许可证边界和维护注意点。
 - `docs/PROJECT_MAP.md`: 项目结构、入口和维护边界。
+- `docs/TEMPLATE_CANDIDATES.md`: 外部候选模板来源、许可证状态、更新状态和导入门槛。
 - `docs/MAINTAINING.md`: 上游同步、验证、发布和已知风险。
 - `docs/RELEASE.md`: 发布资产、发布前 checklist、格式人工复核和 draft release notes 模板。
+- `docs/VITEPRESS.md`: VitePress 2.0 文档站版本、命令和维护说明。
 - `archive/README.md`: 原始资料归档索引和只读边界。
 
 ## 模板说明

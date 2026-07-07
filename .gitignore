@@ -19,6 +19,11 @@
 __pycache__/
 *.py[cod]
 
+# Node and VitePress cache
+node_modules/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+
 # Release artifacts
 dist/
 

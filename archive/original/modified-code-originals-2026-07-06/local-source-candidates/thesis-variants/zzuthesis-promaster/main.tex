@@ -1,0 +1,121 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%修订人：SQK
+%%联系邮箱：sqkphy@163.com
+%%版本修订日期：2024-5-20 13:14
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%根据2009年郑州大学学位论文写作规范修改
+%%修改部分用“modi by sqk”标记
+%%还增加了一些注释，用 “anno by sqk”来标记
+%%注释部分为个人使用习惯增加和删除了部分package
+%%------------------------------------------------------------
+%% 已发现，但未解决的问题   _(눈_눈」∠)________
+%% 1.英文摘要题目不是Arial字体
+%% 可以通过Adobe PDF(或任意PDF编辑软件)编辑PDF解决
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%编译时注意事项 anno by sqk
+%%本版本是使用vs code + texlive2020进行编译
+%%为了使图表目录里面的参考文献引用顺序正常
+%%每次编译前
+%%需要先清理辅助文件(Clean up auxiliary files)
+%%再进行编译(Recipe: xe->bib->xe->xe)
+%%  Another Way:
+%%设置vs code的settings.json文件
+%%每次编译后默认删除 main.lof 和 main.lot 文件
+%%------------------------------------------------------------
+%%如果使用WinEdt + texlive2020
+%%每次编译前
+%%点击垃圾箱图标清理辅助文件
+%%再进行编译
+%%------------------------------------------------------------
+%%如果使用其他软件进行编译
+%%没有一键删除辅助文件(.lof .lot 等)的功能时
+%%可手动删除这些文件，防止文献引用出错
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%其他说明 anno by sqk
+%%图表目录生成时会自动使用'caption'内全部内容                       
+%%为保证目录的简洁                                                 
+%%可分别在'main.lof'和'main.lot'文件内手动修改                      
+%%修改后需将文件保存至父目录                                        
+%%每次通过上述编译方法编译后
+%%再将两个文件移入本文件目录下
+%%再次xeLaTeX编译即可
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[master]{zzuname}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 盲审开关说明  anno by sqk
+%% 此处"{}"内填写 zzuthesis, zzuname 或 MS
+%% 正常版本：zzuthesis(华文行楷-郑州大学)
+%% 正常版本：zzuname  (郭沫若版-郑州大学)
+%% 盲审版本：MS       
+%% \documentclass[bachelor|master|doctor] 分别对应学士、硕士和博士
+%% 一键盲审功能，实乃科研工作之不可缺少之利器 ฅ●ω●ฅ
+%% 个人简历和致谢部分仍需自己手动修改
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+% 自定义宏包
+\usepackage{docutils}
+\setmainfont{Times New Roman}             %所有英文字体改为 Times New Roman   modi by sqk
+\graphicspath{{figures/}}                 %图形文件路径
+
+
+\begin{document}
+
+
+\frontmatter
+\input{data/cover}                        %封面
+\input{data/abstract}                     %摘要
+\makecover
+
+\tableofcontents                          %目录
+\listoffigures                            %插图清单
+\listoftables                             %表格清单
+\makeatletter                             %符号对照表
+  \ifzzu@bachelor\else\include{data/denotation}\fi
+\makeatother
+
+% 正文部分
+\mainmatter
+\include{data/chap01}
+\include{data/chap02}
+\include{data/chap03}
+\include{data/chap04}
+\include{data/chap05}
+
+
+\backmatter
+\bibliographystyle{zzubib.bst}            %学校规范中示例文献风格 modi by sqk 
+\bibliography{ref/refs}                   %参考文献
+
+% 附录
+% 研究生论文：综述
+% \makeatletter
+% \ifzzu@bachelor\else
+%   \include{data/review}
+% \fi
+% \makeatother
+% 附录
+% 本科生论文三个附录，分别是附表，外文翻译和外文原文
+% 研究生论文无具体要求
+
+\makeatletter
+\ifzzu@bachelor
+  \begin{appendix}
+    \input{data/app01}
+    \input{data/app02}
+    \input{data/app03}
+  \end{appendix}
+\fi
+\makeatother
+
+%个人简历
+\makeatletter
+\ifzzu@bachelor\else
+  \include{data/resume}\fi
+\makeatother
+
+%致谢，统一放在论文最后                     modi by sqk
+\makeatletter
+  \include{data/ack}
+\makeatother
+
+\end{document}

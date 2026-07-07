@@ -13,6 +13,7 @@
 | `archive/original/word-templates/collected-docx/` | `D:\Tianxuan3` 中检索到的相关 docx | 2026-07-06 | 11 files, 38.91 MiB | Word 论文、翻译和答辩相关原始资料 |
 | `archive/original/word-templates/collected-doc/` | `D:\Tianxuan3` 中检索到的相关 doc | 2026-07-06 | 4 files, 1.54 MiB | Word 论文流程和旧版毕业论文模板原始资料 |
 | `archive/original/word-templates/course-report-templates/` | `D:\Tianxuan3` 中检索到的课程报告模板 | 2026-07-06 | 4 files, 13.79 MiB | 课程论文/课程设计模板参考资料 |
+| `archive/original/modified-code-originals-2026-07-06/` | Git 历史和本地归档中定位到的改动文件原件/候选 | 2026-07-06 | 22 files, 7 directories, 0.79 MiB | 本地改动代码、论文变体、VitePress 文档和 Word 模板的原件对照备份 |
 
 `新建文件夹` 是来源目录原名，为了保留原始路径语义没有重命名。后续如果需要更友好的名称，优先在本文件补索引说明，不直接改动原始备份目录。
 
@@ -48,6 +49,8 @@
 | `original/word-templates/course-report-templates/2022级力学与工程概论课程论文格式模板.doc` | 课程论文格式模板参考件 | 不作为毕业论文模板来源，只作格式参考 |
 | `original/word-templates/course-report-templates/结构分析程序应用课程设计报告模板(1).docx` | 课程设计报告模板参考件 | 不作为毕业论文模板来源，只作格式参考 |
 | `original/word-templates/course-report-templates/计算力学程序设计报告模板.doc` | 课程设计报告模板参考件 | 不作为毕业论文模板来源，只作格式参考 |
+| `original/modified-code-originals-2026-07-06/git-baselines/` | `origin/main`、当前 `HEAD`、新增文件快照和 `templates/thesis` subtree 导入点的基线 zip | 当前本地改动文件的 Git 原件备份或新增文件快照 |
+| `original/modified-code-originals-2026-07-06/local-source-candidates/` | 论文变体和已定位 Word 模板原件候选副本 | `MANIFEST.csv` 记录当前维护文件到原件/候选的映射；其余 5 个学院 Word 模板未找到同名未处理原件 |
 
 ## 维护规则
 

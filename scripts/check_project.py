@@ -41,6 +41,11 @@ CRITICAL_PATHS = [
     ROOT / "docs" / "PROJECT_MAP.md",
     ROOT / "docs" / "MAINTAINING.md",
     ROOT / "docs" / "RELEASE.md",
+    ROOT / "docs" / "VITEPRESS.md",
+    ROOT / "docs" / "index.md",
+    ROOT / "docs" / ".vitepress" / "config.mts",
+    ROOT / "package.json",
+    ROOT / "package-lock.json",
     ROOT / "scripts" / "check_project.py",
     ROOT / "scripts" / "check_word_templates.py",
     ROOT / "scripts" / "package_release.py",
@@ -80,10 +85,16 @@ def run_step(title: str, command: Sequence[str]) -> bool:
 
 
 def iter_markdown_files() -> Iterable[Path]:
-    ignored_parts = {".git", "dist", "__pycache__"}
+    ignored_parts = {".git", "dist", "__pycache__", "node_modules"}
+    ignored_paths = {
+        Path("docs") / ".vitepress" / "cache",
+        Path("docs") / ".vitepress" / "dist",
+    }
     for path in sorted(ROOT.rglob("*.md")):
         relative = path.relative_to(ROOT)
         if any(part in ignored_parts for part in relative.parts):
+            continue
+        if any(relative.is_relative_to(ignored_path) for ignored_path in ignored_paths):
             continue
         yield path
 
